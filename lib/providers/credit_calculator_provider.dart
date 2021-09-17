@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CreditCalculator extends ChangeNotifier {
-  final List<bool> _termsValue = [true, false, false, false];
+  final List<bool> _termsValue = [false, false, false, false];
   final List<String> _buttonList = ['1 luna', '3 luni', '6 luni', '12 luni'];
   double _credit = 100;
   set credit(double value) {
@@ -11,7 +11,7 @@ class CreditCalculator extends ChangeNotifier {
 
   double get credit => _credit;
 
-  String _period = '1 luna';
+  String _period = '0 luni';
   set period(String value) {
     _period = value;
     notifyListeners();

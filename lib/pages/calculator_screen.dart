@@ -15,6 +15,7 @@ class CreditCalculatorScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final orientation = MediaQuery.of(context).orientation;
     final provider = Provider.of<CreditCalculator>(context);
+    orientation == Orientation.landscape?SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack):null;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -33,9 +34,11 @@ class CreditCalculatorScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: orientation == Orientation.portrait
+                width: size.width,
+                padding:const EdgeInsets.only(bottom: 20,left:5,right: 5),
+                /* height: orientation == Orientation.portrait
                     ? size.height * .31
-                    : size.width * .31,
+                    : size.width * .31, */
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(.2),
                     borderRadius: const BorderRadius.only(
@@ -48,17 +51,20 @@ class CreditCalculatorScreen extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text('Alege-ti suma:',
                             style: TextStyle(color: Colors.blue))),
-                    Slider(
-                        label: provider.credit.toString(),
-                        value: provider.credit,
-                        divisions: 18,
-                        min: 100,
-                        max: 1000,
-                        onChanged: (val) {
-                          provider.credit = val;
-                          provider.getMonthInterest();
-                          provider.getTotalSum();
-                        }),
+                    Padding(
+                      padding: const EdgeInsets.only(right:8.0),
+                      child: Slider(
+                          label: provider.credit.toString(),
+                          value: provider.credit,
+                          divisions: 18,
+                          min: 100,
+                          max: 1000,
+                          onChanged: (val) {
+                            provider.credit = val;
+                            provider.getMonthInterest();
+                            provider.getTotalSum();
+                          }),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0, right: 8),
                       child: Row(
