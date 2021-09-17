@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'calculator_screen.dart';
 
@@ -13,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
-      _navigateToMain();
+        _navigateToMain();
     });
     super.initState();
   }
@@ -22,14 +23,33 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-            builder: (context) => CreditCalculatorScreen()));
+            builder: (context) => const CreditCalculatorScreen()));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      // child:Image.asset('name')
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    return Scaffold(
+      body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.blue[300] as Color,
+              Colors.blue,
+            ], begin: Alignment.topRight, end: Alignment.bottomLeft),
+          ),
+          child: Center(
+            child: Container(
+              height: 200,
+              width: 200,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child:
+                  const Text('MyCreditloans', style: TextStyle(fontSize: 25,color: Colors.blue)),
+            ),
+          )),
     );
   }
 }
